@@ -1,20 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <el-row>
-        <el-button>默认按钮</el-button>
-        <el-button type="primary">主要按钮</el-button>
-        <el-button type="success">成功按钮</el-button>
-        <el-button type="info">信息按钮</el-button>
-        <el-button type="warning">警告按钮</el-button>
-        <el-button type="danger">危险按钮</el-button>
-      </el-row>
-    </div>
-    <router-view />
+    <router-view/>
   </div>
 </template>
+
 <script>
+// 1. 导入封装好的模块 ajax这个名字是可以改换
+import ajax from './utils/request'
 export default {
-  name: 'app'
+  name: 'App',
+  data () {
+    return {
+    }
+  },
+  methods: {
+    hTest () {
+      console.log(1)
+      // 2. 测试使用
+      ajax({
+        method: 'GET',
+        url: '/mp'
+      })
+    }
+  }
 }
-</script>>
+</script>
