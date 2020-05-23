@@ -35,6 +35,7 @@
 
 <script>
 import { userLogin } from '../../api/index.js'
+import { setUser } from '../../utils/storage.js'
 export default {
   name: 'Login',
   data () {
@@ -100,6 +101,8 @@ export default {
 
         // 关闭loading状态
         this.loginLoading = false
+        // localStorage.setItem('userInfo', JSON.stringify(res.data.data))
+        setUser(res.data.data)
         this.$router.push('/')
       }).catch(err => {
         // 登陆出错了

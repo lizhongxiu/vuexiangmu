@@ -95,21 +95,33 @@ export default {
   props: { },
   data () {
     return {
-      user: null,
+      user: {},
       isCollapse: false // 默认侧边栏不折叠（展开）
     }
   },
   computed: { },
   created () {
-    // 请求用户信息
-    userGetProfile().then(res => {
-      console.log(res.data)
-      this.user = res.data.data
-    }).catch(err => {
-      console.log(err)
-    })
+    // 组件创建完成就去调用
+    this.setUserProfile()
   },
-  mounted () {}
+  methods: {
+    // 方法：设置用户信息
+    setUserProfile () {
+      userGetProfile().then(res => {
+        console.log(res)
+        // 注意： res.data.data 这里有两层.data才能取回真正的数据
+        this.user = res.data.data
+      }).catch(err => {
+        console.dir(err)
+        // 401表示没有权限
+        if (err.response.status === 401) {
+          //
+          alert('无权访问')
+          this.$router.push('/login')
+        }
+      })
+    }
+  }
 }
 </script>
 
