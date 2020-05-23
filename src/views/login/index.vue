@@ -100,6 +100,7 @@ export default {
 
         // 关闭loading状态
         this.loginLoading = false
+        this.$router.push('/')
       }).catch(err => {
         // 登陆出错了
         this.$message.error('登陆出错了')

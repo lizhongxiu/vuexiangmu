@@ -2,12 +2,24 @@
 
 import ajax from '../utils/request.js'
 export const userLogin = (mobile, code) => {
+  // 返回promise对象
   return ajax({
     method: 'POST',
     url: '/mp/v1_0/authorizations',
     data: {
       mobile: mobile,
       code: code
+    }
+  })
+}
+// 获取用户身份信息
+export const userGetProfile = () => {
+  // 返回promise对象
+  return ajax({
+    method: 'GET',
+    url: '/mp/v1_0/user/profile',
+    headers: {
+      Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjE2NDgwMTMsInVzZXJfaWQiOjEsInJlZnJlc2giOmZhbHNlLCJ2ZXJpZmllZCI6dHJ1ZX0.9nDEYT2H0QE5wXzrzx9lvw_svtqgfbv_JscOBtyXUfo'
     }
   })
 }
