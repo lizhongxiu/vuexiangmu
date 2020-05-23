@@ -10,7 +10,9 @@ const KEY = 'hm-tt-pc-userinfo'
 const setUser = (user) => {
   localStorage.setItem(KEY, JSON.stringify(user))
 }
-
+const delUser = (user) => {
+  localStorage.removeItem(KEY)
+}
 /**
  * 取出用户信息
  */
@@ -25,4 +27,4 @@ const getUser = () => {
   return result
 }
 
-export { setUser, getUser }
+export { setUser, getUser, delUser }
