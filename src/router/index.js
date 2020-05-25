@@ -4,6 +4,7 @@ import Login from '../views/login/index.vue'
 import Layout from './../views/layout/index.vue'
 import { getUser } from '../utils/storage'
 import articles from './../views/articles/index'
+import NOTFOUND from './../views/page404/index'
 
 // import LayoutIndex from './../views/layout/index1.vue'
 
@@ -17,7 +18,8 @@ const routes = [
     children: [
       { path: '/articles', component: articles }
     ]
-  }
+  },
+  { path: '*', component: NOTFOUND }
   // { path: '/', component: LayoutIndex }
 
 ]
