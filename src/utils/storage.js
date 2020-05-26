@@ -23,7 +23,7 @@ const getUser = () => {
   //    当userInfo为null,代码就挂了
   //    当userInfo为{}，代码是Ok
   const result = JSON.parse(localStorage.getItem(KEY)) || {}
-  console.log('getuser', result)
+  // console.log('getuser', result)
   return result
 }
 

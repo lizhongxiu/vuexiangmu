@@ -97,7 +97,7 @@ export default {
           message: '登陆成功',
           type: 'success'
         })
-        console.log(res.data)
+        // console.log(res.data)
 
         // 关闭loading状态
         this.loginLoading = false
@@ -117,7 +117,7 @@ export default {
     hLogin () {
       console.log(this.$refs.myform)
       this.$refs.myform.validate(valid => {
-        console.log('验证结果', valid)
+        // console.log('验证结果', valid)
         if (valid) {
           // 验证成功
           this.login()
