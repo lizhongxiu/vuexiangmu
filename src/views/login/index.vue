@@ -1,5 +1,5 @@
 <template>
-  <div class='login-container'>
+  <div class="login-container">
     <div class="login-form-wrap">
       <!-- logo部分 -->
       <div class="login-head">
@@ -21,7 +21,7 @@
         </el-form-item>
 
         <el-form-item prop="agree">
-          <el-checkbox v-model="user.agree" >我已阅读并同意用户协议和隐私条款</el-checkbox>
+          <el-checkbox v-model="user.agree">我已阅读并同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
 
         <el-form-item>
@@ -84,34 +84,28 @@ export default {
     }
   },
   methods: {
-    login () {
+    async login () {
       // 开启按钮上的loading效果
       this.loginLoading = true
-
       // 3. 发根据接口文档的要求，发出ajax请求
       //  https://gitee.com/fanyoufu2/hmpc/blob/master/doc/00-%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.md#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E7%99%BB%E5%BD%95
       //  1) 引入request.js
       //  2) 发请求
-      userLogin(this.user.mobile, this.user.code).then(res => {
-        this.$message({
-          message: '登陆成功',
-          type: 'success'
-        })
+      try {
+        const res = await userLogin(this.user.mobile, this.user.code)
+        this.$message({ message: '登陆成功', type: 'success' })
         // console.log(res.data)
-
         // 关闭loading状态
         this.loginLoading = false
         // localStorage.setItem('userInfo', JSON.stringify(res.data.data))
         setUser(res.data.data)
         this.$router.push('/')
-      }).catch(err => {
-        // 登陆出错了
+      } catch (err) {
         this.$message.error('登陆出错了')
         console.log(err)
-
         // 关闭loading状态
         this.loginLoading = false
-      })
+      }
     },
     // 实现登陆功能
     hLogin () {
@@ -126,6 +120,48 @@ export default {
     }
   }
 }
+//     login () {
+//       // 开启按钮上的loading效果
+//       this.loginLoading = true
+
+//       // 3. 发根据接口文档的要求，发出ajax请求
+//       //  https://gitee.com/fanyoufu2/hmpc/blob/master/doc/00-%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3.md#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E7%99%BB%E5%BD%95
+//       //  1) 引入request.js
+//       //  2) 发请求
+//       userLogin(this.user.mobile, this.user.code).then(res => {
+//         this.$message({
+//           message: '登陆成功',
+//           type: 'success'
+//         })
+//         // console.log(res.data)
+
+//         // 关闭loading状态
+//         this.loginLoading = false
+//         // localStorage.setItem('userInfo', JSON.stringify(res.data.data))
+//         setUser(res.data.data)
+//         this.$router.push('/')
+//       }).catch(err => {
+//         // 登陆出错了
+//         this.$message.error('登陆出错了')
+//         console.log(err)
+
+//         // 关闭loading状态
+//         this.loginLoading = false
+//       })
+//     },
+//     // 实现登陆功能
+//     hLogin () {
+//       console.log(this.$refs.myform)
+//       this.$refs.myform.validate(valid => {
+//         // console.log('验证结果', valid)
+//         if (valid) {
+//           // 验证成功
+//           this.login()
+//         }
+//       })
+//     }
+//   }
+// }
 </script>
 
 <style scoped lang="less">
@@ -137,7 +173,7 @@ export default {
   right: 0;
   bottom: 0;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: url("../../assets/login_bg.jpg") no-repeat;
