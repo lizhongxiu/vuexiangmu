@@ -44,14 +44,28 @@
         :page-size="per_page"
         :total="total_count">
       </el-pagination>
-      <el-dialog
-       @click="showDialog=true"
-       title="上传图片素材"
-       :append-to-body="true"
-       :visible.sync="showDialog"
-       >
-      上传
-      </el-dialog>
+    <el-dialog
+        title="上传图片素材"
+        :append-to-body="true"
+        :visible.sync="showDialog">
+        <!-- action="https://jsonplaceholder.typicode.com/posts/" 上传接口地址 -->
+        <!-- :show-file-list="false" 上传一张图片，不需要文件列表 -->
+        <!-- :on-success="handleAvatarSuccess" 绑定的函数在上传成功后户调用 -->
+        <el-upload
+          class="avatar-uploader"
+          action="http://ttapi.research.itcast.cn/mp/v1_0/user/images"
+          :headers="headers"
+          name="image"
+          :show-file-list="false"
+          :on-success="hUploadSuccess">
+          <!-- 两个标签  上传按钮  预览图片 只能显示一个 -->
+          <!-- v-if="imageUrl" 有图片地址，那显示图片，把地址绑定src -->
+          <el-image v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <!-- v-else  没有图片地址 ，那显示上传按钮  +号按钮 -->
+          <!-- 同级的标签，才能v-if和v-else配合使用  -->
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+    </el-dialog>
     </el-card>
   </div>
 </template>
@@ -60,6 +74,8 @@
 // vuecli工具中，提供一个路径别名： @表示 src/  的绝对地址
 import MyBreadcrumb from '@/components/MyBreadcrumb'
 import { getImages } from '@/api/image.js'
+import { getUser } from '@/utils/storage'
+
 export default {
   name: 'ImageIndex',
   props: { },
@@ -68,6 +84,10 @@ export default {
   },
   data () {
     return {
+      imageUrl: null,
+      headers: {
+        Authorization: `Bearer ${getUser().token}`
+      },
       showDialog: false,
       images: [],
       collect: false,
@@ -98,6 +118,24 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    hUploadSuccess (res) {
+      // 预览
+      this.imageUrl = res.data.url
+      // 提示
+      this.$message.success('上传素材成功')
+      this.loadImages()
+      this.hLoadedImage()
+    },
+
+    hLoadedImage () {
+      // 3s后
+      window.setTimeout(() => {
+        // 关闭对话框
+        this.showDialog = false
+
+        this.imageUrl = null
+      }, 3000)
     },
     // 翻页按钮
     hPageChange (curPage) {
