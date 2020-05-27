@@ -16,3 +16,23 @@ export const getImages = (paramObj) => {
     params: paramObj
   })
 }
+/**
+ * 删除图片
+ * @param {number} id 图片编号
+ */
+export const delImage = id => {
+  return ajax({
+    method: 'DELETE',
+    url: '/mp/v1_0/user/images/' + id
+  })
+}
+/**
+ * 修改图片
+ */
+export const modImage = (id, data) => {
+  return ajax({
+    method: 'PUT',
+    url: '/mp/v1_0/user/images/' + id,
+    data
+  })
+}

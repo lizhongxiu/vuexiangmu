@@ -31,8 +31,12 @@
           ></el-image>
           <div class="option" v-show="!collect">
             <!-- 是否收藏 -->
-            <span :style="{color:image.is_collected ? 'red': '#fff'} " class="el-icon-star-off"></span>
-            <span class="el-icon-delete"></span>
+            <span
+                class="el-icon-star-off"
+                @click="hToggleCollect(image)"
+                :style="{color:image.is_collected?'red':'#fff'}"
+            ></span>
+            <span class="el-icon-delete" @click="hDelImage(image.id)"></span>
           </div>
        </el-col>
       </el-row>
@@ -73,7 +77,8 @@
 <script>
 // vuecli工具中，提供一个路径别名： @表示 src/  的绝对地址
 import MyBreadcrumb from '@/components/MyBreadcrumb'
-import { getImages } from '@/api/image.js'
+// eslint-disable-next-line no-unused-vars
+import { getImages, delImage, modImage } from '@/api/image.js'
 import { getUser } from '@/utils/storage'
 
 export default {
@@ -103,6 +108,37 @@ export default {
   methods: {
     // 在后面的分页，删除等操作中，加载图片会多次使用
     // 所以这里封装成一个独立的方法
+    async hDelImage (id) {
+      this.$confirm('此操作将永久删除该图片素材, 是否继续?', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        // 点击确认
+        try {
+          // 请求
+          await delImage(id)
+          // 成功提示
+          this.$message.success('删除成功')
+          // 更新当前页素材列表
+          this.loadImages()
+        } catch (e) {
+          console.log(e)
+          // 失败提示
+          this.$message.error('删除失败')
+        }
+      }).catch(() => {})
+    },
+    // 收藏部分
+    async hToggleCollect (image) {
+      try {
+        const result = await modImage(image.id, { collect: !image.is_collected })
+        image.is_collected = result.data.data.collect
+      } catch (e) {
+        console.log(e)
+        this.$message.error('操作失败')
+      }
+    },
     async loadImages () {
       try {
         const res = await getImages({
