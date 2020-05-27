@@ -6,6 +6,8 @@ import { getUser } from '../utils/storage'
 import articles from './../views/articles/index'
 import NOTFOUND from './../views/page404/index'
 import EditArticle from '../views/articles/edit.vue'
+import image from '../views/image/index.vue'
+
 // import LayoutIndex from './../views/layout/index1.vue'
 
 Vue.use(VueRouter)
@@ -18,7 +20,9 @@ const routes = [
     children: [
       { path: '/articles', component: articles },
       // 编辑文章
-      { path: '/editArticle/:id', component: EditArticle }
+      { path: '/editArticle/:id', component: EditArticle },
+      { path: '/image', component: image }
+
     ]
   },
   { path: '*', component: NOTFOUND }
