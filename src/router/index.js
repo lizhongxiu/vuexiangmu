@@ -7,7 +7,7 @@ import articles from './../views/articles/index'
 import NOTFOUND from './../views/page404/index'
 import EditArticle from '../views/articles/edit.vue'
 import image from '../views/image/index.vue'
-
+import AddArticle from '../views/articles/add.vue'
 // import LayoutIndex from './../views/layout/index1.vue'
 
 Vue.use(VueRouter)
@@ -21,7 +21,9 @@ const routes = [
       { path: '/articles', component: articles },
       // 编辑文章
       { path: '/editArticle/:id', component: EditArticle },
-      { path: '/image', component: image }
+      { path: '/image', component: image },
+      // 发布文章
+      { path: '/addArticle', component: AddArticle }
 
     ]
   },

@@ -27,7 +27,7 @@ export const delImage = id => {
   })
 }
 /**
- * 修改图片
+ * 修改图片收藏
  */
 export const modImage = (id, data) => {
   return ajax({

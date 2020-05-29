@@ -41,6 +41,7 @@
        </el-col>
       </el-row>
       <el-pagination
+        :hide-on-single-page="true"
         style="margin-top:10px;"
         background
         layout="prev, pager, next"
@@ -129,7 +130,7 @@ export default {
         }
       }).catch(() => {})
     },
-    // 收藏部分
+    // 收藏部分第一种
     async hToggleCollect (image) {
       try {
         const result = await modImage(image.id, { collect: !image.is_collected })
@@ -139,6 +140,17 @@ export default {
         this.$message.error('操作失败')
       }
     },
+    // 收藏部分第二种需要改为驼峰命名法
+    // async hToggleCollect (image) {
+    //   const { id, is_collected } = image
+    //   try {
+    //     await modImage(id, !is_collected)
+    //     image.is_collected = !is_collected
+    //   } catch (e) {
+    //     console.log(e)
+    //     this.$message.error('操作失败')
+    //   }
+    // },
     async loadImages () {
       try {
         const res = await getImages({
@@ -155,6 +167,7 @@ export default {
         console.log(err)
       }
     },
+    // 上传素材
     hUploadSuccess (res) {
       // 预览
       this.imageUrl = res.data.url
