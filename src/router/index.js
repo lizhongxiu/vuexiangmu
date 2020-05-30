@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/login/index.vue'
+import home from '../views/home/index.vue'
 import Layout from './../views/layout/index.vue'
 import { getUser } from '../utils/storage'
 import articles from './../views/articles/index'
@@ -18,6 +19,7 @@ const routes = [
     path: '/',
     component: Layout,
     children: [
+      { path: '', component: home },
       { path: '/articles', component: articles },
       // 编辑文章
       { path: '/editArticle/:id', component: EditArticle },
