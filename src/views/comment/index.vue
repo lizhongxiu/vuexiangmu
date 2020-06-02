@@ -52,12 +52,12 @@
               v-if="scope.row.comment_status"
               size="mini"
               type="primary"
-              @click="hToggleComment(scope.row)">打开评论</el-button>
+              @click="hToggleComment(scope.row)" :loading="loading">打开评论</el-button>
             <el-button
               v-else
               size="mini"
               type="danger"
-              @click="hToggleComment(scope.row)">关闭评论</el-button>
+              @click="hToggleComment(scope.row)" :loading="loading">关闭评论</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -94,6 +94,7 @@ export default {
   },
   data () {
     return {
+      fullscreenLoading: false,
       page: 1, // 第一页
       per_Page: 10, // 每页10条
       loading: false, // 是否加载
@@ -116,12 +117,19 @@ export default {
       console.log(comment)
       try {
         // 发请求
+        this.loading = true
         await modCommentStatus(comment.id.toString(), !comment.comment_status)
         // 更新数据
         comment.comment_status = !comment.comment_status
         this.$message.success('操作成功')
+        // 关闭加载状态
+        setTimeout(() => {
+          this.loading = false
+        }, 800)
       } catch {
         this.$message.error('操作失败')
+        // 关闭加载状态
+        this.loading = false
       }
     },
     // 它会自动传入当前的页码

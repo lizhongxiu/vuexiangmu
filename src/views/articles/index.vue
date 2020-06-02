@@ -262,7 +262,7 @@ export default {
       })
     },
     hQuery () {
-      console.log(this.form.date)
+      // console.log(this.form.date)
       // 再次调用 查询方法
       // 用户点击查询，重置页码
       this.curPage = 1
