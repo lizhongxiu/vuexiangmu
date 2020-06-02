@@ -1,18 +1,27 @@
 <template>
   <div class=''>
-      主页
-      <el-form>
+      <el-calendar>
+        <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
+        <template
+          slot="dateCell"
+          slot-scope="{date, data}">
+          <p :class="data.isSelected ? 'is-selected' : ''">
+            {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔️' : ''}}
+          </p>
+        </template>
+      </el-calendar>
+      <!-- <el-form>
           <my-channels @zdy='zdy' ></my-channels>
           <vmodel1 v-model="channel_id"></vmodel1>
           <my-cover></my-cover>
-      </el-form>
+      </el-form> -->
   </div>
 </template>
 
 <script>
-import MyChannels from '@/components/MyChannels'
-import MyCover from '@/components/Mycover'
-import vmodel1 from '@/components/vmodel1'
+// import MyChannels from '@/components/MyChannels'
+// import MyCover from '@/components/Mycover'
+// import vmodel1 from '@/components/vmodel1'
 export default {
   name: 'Home',
   props: { },
@@ -22,9 +31,9 @@ export default {
     }
   },
   components: {
-    MyChannels,
-    vmodel1,
-    MyCover
+    // MyChannels,
+    // vmodel1,
+    // MyCover
   },
   computed: { },
   created () { },
