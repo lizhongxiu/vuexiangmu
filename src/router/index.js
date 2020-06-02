@@ -1,17 +1,37 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Login from '../views/login/index.vue'
-import home from '../views/home/index.vue'
-import Layout from './../views/layout/index.vue'
 import { getUser } from '../utils/storage'
-import articles from './../views/articles/index'
-import NOTFOUND from './../views/page404/index'
-import EditArticle from '../views/articles/edit.vue'
-import image from '../views/image/index.vue'
-import AddArticle from '../views/articles/add.vue'
-import Comment from '../views/comment/index.vue'
-import fans from '../views/fans/index.vue'
-import settings from '../views/settings/index.vue'
+import VueRouter from 'vue-router'
+// import Login from '../views/login/index.vue'
+const Login = () => import('../views/login/index.vue')
+// import home from '../views/home/index.vue'
+const home = () => import('../views/home/index.vue')
+
+// import Layout from './../views/layout/index.vue'
+const Layout = () => import('../views/layout/index.vue')
+
+// import articles from './../views/articles/index'
+const articles = () => import('../views/articles/index.vue')
+
+// import NOTFOUND from './../views/page404/index'
+const NOTFOUND = () => import('../views/page404/index.vue')
+
+// import EditArticle from '../views/articles/edit.vue'
+const EditArticle = () => import('../views/articles/edit.vue')
+
+// import image from '../views/image/index.vue'
+const image = () => import('../views/image/index.vue')
+
+// import AddArticle from '../views/articles/add.vue'
+const AddArticle = () => import('../views/articles/add.vue')
+
+// import Comment from '../views/comment/index.vue'
+const Comment = () => import('../views/comment/index.vue')
+
+// import fans from '../views/fans/index.vue'
+const fans = () => import('../views/fans/index.vue')
+
+// import settings from '../views/settings/index.vue'
+const settings = () => import('../views/settings/index.vue')
 
 // import LayoutIndex from './../views/layout/index1.vue'
 
