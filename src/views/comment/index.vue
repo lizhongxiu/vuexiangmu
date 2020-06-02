@@ -114,10 +114,10 @@ export default {
       this.total_count = result.data.data.total_count
     },
     async hToggleComment (comment) {
+      this.loading = true
       console.log(comment)
       try {
         // 发请求
-        this.loading = true
         await modCommentStatus(comment.id.toString(), !comment.comment_status)
         // 更新数据
         comment.comment_status = !comment.comment_status
