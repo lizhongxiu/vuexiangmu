@@ -64,7 +64,7 @@ const router = new VueRouter({
 })
 // 所有路由跳转之前会执行
 router.beforeEach((to, from, next) => {
-  if (to.path === '/') {
+  if (to.path === '/' || to.path === './articles') {
     const userInfo = getUser()
     if (userInfo && userInfo.token) {
       next()
