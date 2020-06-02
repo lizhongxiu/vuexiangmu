@@ -9,6 +9,10 @@ import NOTFOUND from './../views/page404/index'
 import EditArticle from '../views/articles/edit.vue'
 import image from '../views/image/index.vue'
 import AddArticle from '../views/articles/add.vue'
+import Comment from '../views/comment/index.vue'
+import fans from '../views/fans/index.vue'
+import settings from '../views/settings/index.vue'
+
 // import LayoutIndex from './../views/layout/index1.vue'
 
 Vue.use(VueRouter)
@@ -25,8 +29,10 @@ const routes = [
       { path: '/editArticle/:id', component: EditArticle },
       { path: '/image', component: image },
       // 发布文章
-      { path: '/addArticle', component: AddArticle }
-
+      { path: '/addArticle', component: AddArticle },
+      { path: '/comment', component: Comment },
+      { path: '/fans', component: fans },
+      { path: '/settings', component: settings }
     ]
   },
   { path: '*', component: NOTFOUND }

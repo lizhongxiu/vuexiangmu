@@ -89,6 +89,14 @@ export default {
   },
   computed: { },
   created () {
+    this.$eventBus.$on('updatausername', newname => {
+      console.log('在layout中', newname)
+      this.user.name = newname
+    })
+    this.$eventBus.$on('updatauserphoto', newphoto => {
+      console.log('在layout中', newphoto)
+      this.user.photo = newphoto
+    })
     // 组件创建完成就去调用
     this.setUserProfile()
   },

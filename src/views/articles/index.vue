@@ -23,8 +23,7 @@
             <el-radio :label="4">已删除</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="频道">
-          <!-- clearable： 表示可清空的单选 -->
+        <!-- <el-form-item label="频道">
           <el-select v-model="form.channelId" clearable placeholder="请选择频道">
             <el-option
             v-for="channel in channels"
@@ -32,7 +31,8 @@
             :label="channel.name"
             :value="channel.id"></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item> -->
+        <vmodel1 v-model="form.channelId"></vmodel1>
         <!--
           daterange:
                date日期，range:区域
@@ -163,6 +163,7 @@
 </template>
 
 <script>
+import vmodel1 from '@/components/vmodel1'
 import MyBreadcrumb from '../../components/MyBreadcrumb'
 import { getArticles, getArticleChannels, deleteArticle } from '../../api/articles'
 export default {
@@ -185,7 +186,8 @@ export default {
     }
   },
   components: {
-    MyBreadcrumb
+    MyBreadcrumb,
+    vmodel1
   },
   created () {
     // 相当于window.onload 。

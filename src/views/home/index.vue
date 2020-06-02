@@ -4,15 +4,17 @@
       <el-form>
           <my-channels @zdy='zdy' ></my-channels>
           <vmodel1 v-model="channel_id"></vmodel1>
+          <my-cover></my-cover>
       </el-form>
   </div>
 </template>
 
 <script>
 import MyChannels from '@/components/MyChannels'
+import MyCover from '@/components/Mycover'
 import vmodel1 from '@/components/vmodel1'
 export default {
-  name: 'MyComponent',
+  name: 'Home',
   props: { },
   data () {
     return {
@@ -20,10 +22,9 @@ export default {
     }
   },
   components: {
-    // eslint-disable-next-line vue/no-unused-components
     MyChannels,
-    // eslint-disable-next-line no-undef
-    vmodel1
+    vmodel1,
+    MyCover
   },
   computed: { },
   created () { },

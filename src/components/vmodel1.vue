@@ -17,7 +17,7 @@ export default {
   data () {
     return {
       props: ['value'],
-      channelId: '', // 当前选中的频道
+      channelId: this.value, // 当前选中的频道
       channels: [] // 频道列表
     }
   },
@@ -35,6 +35,14 @@ export default {
       const result = await getArticleChannels()
       console.log(result)
       this.channels = result.data.data.channels
+    }
+  },
+  watch: {
+    // 如果 value值有变化，则直接赋值给channelId（v-model中的数据）
+    // value (newVal,oldVal) {
+    value () {
+      console.log('value的值变化了', this.value)
+      this.channelId = this.value
     }
   }
 }

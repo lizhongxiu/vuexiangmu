@@ -23,7 +23,7 @@
             <el-radio :label="-1">自动</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="频道" prop="channel_id">
+        <!-- <el-form-item label="频道" prop="channel_id">
           <el-select v-model="article.channel_id" placeholder="请选择活动区域">
             <el-option
             v-for="channel in channels"
@@ -31,8 +31,16 @@
             :label="channel.name"
             :value="channel.id"></el-option>
           </el-select>
+        </el-form-item> -->
+        <!-- 只有用户选中有图：1张，3张 ，才使用封面组件 -->
+        <el-form-item v-if="article.cover.type > 0" label="">
+          <el-row :gutter="10">
+              <el-col v-for="(item,idx) in article.cover.type" :key="idx" :xs="8" :sm="6" :md="6" :lg="4">
+                  {{idx}}<my-cover v-model="article.cover.images[idx]"></my-cover>
+              </el-col>
+          </el-row>
         </el-form-item>
-
+        <vmodel1 v-model="article.channel_id"></vmodel1>
         <el-form-item>
           <el-button type="primary" @click="hAddArticle(false)">发表</el-button>
           <el-button @click="hAddArticle(true)">存入草稿</el-button>
@@ -50,9 +58,9 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 // 导入组件
 import { quillEditor } from 'vue-quill-editor'
-
+import vmodel1 from '@/components/vmodel1'
 import { getArticleChannels, addArticle } from '@/api/articles'
-
+import MyCover from '@/components/Mycover'
 /**
  * 表单验证：
  * 1. 建立验证规则
@@ -65,7 +73,10 @@ export default {
   components: {
     MyBreadcrumb,
     // 注册组件
-    quillEditor
+    quillEditor,
+    // eslint-disable-next-line vue/no-unused-components
+    MyCover,
+    vmodel1
   },
   data () {
     return {
